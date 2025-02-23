@@ -22,11 +22,12 @@ public class BlockCommands implements Listener {
 
     @EventHandler
     public void onBlock(PlayerCommandPreprocessEvent event) {
-        Player player = event.getPlayer();
-
         if (event.isCancelled()) return;
 
-        if (!player.hasPermission("block.command.bypass") && BLOCKED_COMMANDS.contains(event.getMessage())) {
+        Player player = event.getPlayer();
+        String command = event.getMessage().toLowerCase();
+
+        if (!player.hasPermission("block.command.bypass") && BLOCKED_COMMANDS.contains(command)) {
             player.sendMessage("§c➜ Comando não encontrado no §7Banco de Dados");
             event.setCancelled(true);
         }
